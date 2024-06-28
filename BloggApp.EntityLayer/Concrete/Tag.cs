@@ -12,8 +12,7 @@ namespace BloggApp.EntityLayer.Concrete
         public int TagId { get; set; }
         public string TagTitle { get; set; }
 
-        // Navigation properties
-        public ICollection<Article> Articles { get; set; } = new List<Article>();
+        public List<Article> Articles { get; set; } = new List<Article>();
     }
 
 

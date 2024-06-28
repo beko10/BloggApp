@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BlogApp.BusinessLyaer.Abstract;
 using BlogApp.EntityLayer.Dtos.CommentDto;
-using BloggApp.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,8 +20,8 @@ namespace BlogApp.API.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateComment(AddCommentDto addCommentDto) 
-        { 
+        public IActionResult CreateComment(AddCommentDto addCommentDto)
+        {
             _commentService.Add(addCommentDto);
             return Ok(addCommentDto);
         }
@@ -38,7 +37,7 @@ namespace BlogApp.API.Controllers
         public IActionResult DeleteComment(int id)
         {
             var deletedComment = _commentService.GetById(id);
-            _commentService.Delete(deletedComment); 
+            _commentService.Delete(deletedComment);
             return Ok(deletedComment);
         }
     }

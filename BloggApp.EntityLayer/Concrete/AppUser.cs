@@ -9,6 +9,6 @@ namespace BloggApp.EntityLayer.Concrete
 {
     public class AppUser:IdentityUser
     {
-        public ICollection<Article> Articles { get; set; }
+        public List<Article> Articles { get; set; } = new List<Article>();
     }
 }

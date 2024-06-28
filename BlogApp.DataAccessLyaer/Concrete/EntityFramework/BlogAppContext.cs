@@ -26,26 +26,6 @@ namespace BlogApp.DataAccessLyaer.Concrete.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
 
-            // Ara tablo için konfigürasyon
-            modelBuilder.Entity<Article>()
-                .HasMany(a => a.Tags)
-                .WithMany(t => t.Articles)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ArticleTag",
-                    j => j
-                        .HasOne<Tag>()
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .HasConstraintName("FK_ArticleTag_Tags_TagId")
-                        .OnDelete(DeleteBehavior.Cascade),
-                    j => j
-                        .HasOne<Article>()
-                        .WithMany()
-                        .HasForeignKey("ArticleId")
-                        .HasConstraintName("FK_ArticleTag_Articles_ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                );
-
             // Seed Users
             var hasher = new PasswordHasher<AppUser>();
             var user1 = new AppUser

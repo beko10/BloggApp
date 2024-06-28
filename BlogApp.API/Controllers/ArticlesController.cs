@@ -35,7 +35,7 @@ namespace BlogApp.API.Controllers
             var result = _articleService.GetAllArticlesWithDetails(id);
             return Ok(result);
         }
-        
+
         [HttpPut]
         public IActionResult UpdateArticle(UpdateArticleDto updateArticleDto)
         {

@@ -1,4 +1,4 @@
-namespace BlogaApp.API
+namespace BlogApp.API
 {
     public class WeatherForecast
     {

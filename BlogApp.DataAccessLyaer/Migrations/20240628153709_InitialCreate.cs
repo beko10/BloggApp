@@ -196,21 +196,21 @@ namespace BlogApp.DataAccessLyaer.Migrations
                 name: "ArticleTag",
                 columns: table => new
                 {
-                    ArticleId = table.Column<int>(type: "int", nullable: false),
-                    TagId = table.Column<int>(type: "int", nullable: false)
+                    ArticlesArticleId = table.Column<int>(type: "int", nullable: false),
+                    TagsTagId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArticleTag", x => new { x.ArticleId, x.TagId });
+                    table.PrimaryKey("PK_ArticleTag", x => new { x.ArticlesArticleId, x.TagsTagId });
                     table.ForeignKey(
-                        name: "FK_ArticleTag_Articles_ArticleId",
-                        column: x => x.ArticleId,
+                        name: "FK_ArticleTag_Articles_ArticlesArticleId",
+                        column: x => x.ArticlesArticleId,
                         principalTable: "Articles",
                         principalColumn: "ArticleId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ArticleTag_Tags_TagId",
-                        column: x => x.TagId,
+                        name: "FK_ArticleTag_Tags_TagsTagId",
+                        column: x => x.TagsTagId,
                         principalTable: "Tags",
                         principalColumn: "TagId",
                         onDelete: ReferentialAction.Cascade);
@@ -239,7 +239,7 @@ namespace BlogApp.DataAccessLyaer.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "0e6102bf-591d-44e4-a55e-a58c3bc0fcd9", "user1@example.com", true, false, null, "USER1@EXAMPLE.COM", "USER1", "AQAAAAIAAYagAAAAED36znC3qeFkDxAa4euttYBHfKgPMOqS6GKZs3EXl40D9/aaIaxLQgFwo5o9qhrcdA==", null, false, "be0b9d77-0ba2-4475-aa1a-cf9caedd5bb2", false, "user1" });
+                values: new object[] { "1", 0, "2d9f05f2-28ed-4628-9a33-12ed75bcd01a", "user1@example.com", true, false, null, "USER1@EXAMPLE.COM", "USER1", "AQAAAAIAAYagAAAAELVbBlfh2AeXlwBbGMYo2KySqwKxkbqhdSRHIr1GZVdQc4VaF7OVpp6PMIsP4piKrA==", null, false, "94b693c2-8e11-42c1-831c-5440b30bc295", false, "user1" });
 
             migrationBuilder.InsertData(
                 table: "Tags",
@@ -274,9 +274,9 @@ namespace BlogApp.DataAccessLyaer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArticleTag_TagId",
+                name: "IX_ArticleTag_TagsTagId",
                 table: "ArticleTag",
-                column: "TagId");
+                column: "TagsTagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

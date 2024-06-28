@@ -24,15 +24,15 @@ namespace BlogApp.DataAccessLyaer.Migrations
 
             modelBuilder.Entity("ArticleTag", b =>
                 {
-                    b.Property<int>("ArticleId")
+                    b.Property<int>("ArticlesArticleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TagId")
+                    b.Property<int>("TagsTagId")
                         .HasColumnType("int");
 
-                    b.HasKey("ArticleId", "TagId");
+                    b.HasKey("ArticlesArticleId", "TagsTagId");
 
-                    b.HasIndex("TagId");
+                    b.HasIndex("TagsTagId");
 
                     b.ToTable("ArticleTag");
                 });
@@ -133,15 +133,15 @@ namespace BlogApp.DataAccessLyaer.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0e6102bf-591d-44e4-a55e-a58c3bc0fcd9",
+                            ConcurrencyStamp = "2d9f05f2-28ed-4628-9a33-12ed75bcd01a",
                             Email = "user1@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@EXAMPLE.COM",
                             NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAIAAYagAAAAED36znC3qeFkDxAa4euttYBHfKgPMOqS6GKZs3EXl40D9/aaIaxLQgFwo5o9qhrcdA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELVbBlfh2AeXlwBbGMYo2KySqwKxkbqhdSRHIr1GZVdQc4VaF7OVpp6PMIsP4piKrA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "be0b9d77-0ba2-4475-aa1a-cf9caedd5bb2",
+                            SecurityStamp = "94b693c2-8e11-42c1-831c-5440b30bc295",
                             TwoFactorEnabled = false,
                             UserName = "user1"
                         });
@@ -365,17 +365,15 @@ namespace BlogApp.DataAccessLyaer.Migrations
                 {
                     b.HasOne("BloggApp.EntityLayer.Concrete.Article", null)
                         .WithMany()
-                        .HasForeignKey("ArticleId")
+                        .HasForeignKey("ArticlesArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_ArticleTag_Articles_ArticleId");
+                        .IsRequired();
 
                     b.HasOne("BloggApp.EntityLayer.Concrete.Tag", null)
                         .WithMany()
-                        .HasForeignKey("TagId")
+                        .HasForeignKey("TagsTagId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_ArticleTag_Tags_TagId");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BloggApp.EntityLayer.Concrete.Article", b =>
