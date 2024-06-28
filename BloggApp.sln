@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.EntityLayer", "Blog
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.CoreLayer", "BlogApp.CoreLayer\BlogApp.CoreLayer.csproj", "{B7E73E26-F9C5-4BA7-8B40-C074DC6F20A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.DataAccessLyaer", "BlogApp.DataAccessLyaer\BlogApp.DataAccessLyaer.csproj", "{B8BD3907-7D5C-453E-BA48-6435B3B7666B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.DataAccessLayer", "BlogApp.DataAccessLyaer\BlogApp.DataAccessLayer.csproj", "{B8BD3907-7D5C-453E-BA48-6435B3B7666B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.BusinessLyaer", "BlogApp.BusinessLyaer\BlogApp.BusinessLyaer.csproj", "{E67594F5-69A5-42B4-A426-FFE6C1DE17A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.BusinessLayer", "BlogApp.BusinessLyaer\BlogApp.BusinessLayer.csproj", "{E67594F5-69A5-42B4-A426-FFE6C1DE17A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.API", "BlogApp.API\BlogApp.API.csproj", "{FD9611EE-BCE0-49EB-AA93-EE2972D86590}"
 EndProject
