@@ -4,18 +4,30 @@ using BlogApp.BusinessLyaer.Abstract;
 using BlogApp.BusinessLyaer.Concrete;
 using BlogApp.DataAccessLyaer.Abstract;
 using BlogApp.DataAccessLyaer.Concrete.EntityFramework;
+using BloggApp.EntityLayer.Concrete;
 using Castle.DynamicProxy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Reflection;
 using Module = Autofac.Module;
 
 
 namespace BlogApp.BusinessLyaer.DependencyResolvers.Autofac
 {
-    public class AutofacBusinessModule:Module
+    public class AutofacBusinessModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
+            // Db context
             builder.RegisterType<BlogAppContext>().AsSelf().InstancePerLifetimeScope();
+
+            // Identity services
+            builder.RegisterType<UserManager<AppUser>>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<SignInManager<AppUser>>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<RoleManager<IdentityRole>>().AsSelf().InstancePerLifetimeScope();
+
+            // ISessionManagementService eklenmesi
+            builder.RegisterType<SessionManagementManager>().As<ISessionManagementService>().SingleInstance();
 
             // Article
             builder.RegisterType<ArticleManager>().As<IArticleService>().SingleInstance();
@@ -29,8 +41,7 @@ namespace BlogApp.BusinessLyaer.DependencyResolvers.Autofac
             builder.RegisterType<TagManager>().As<ITagService>().SingleInstance();
             builder.RegisterType<EfTagDal>().As<ITagDal>().SingleInstance();
 
-
-            //Automapper
+            // Automapper
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .AssignableTo<Profile>()
                 .As<Profile>();
@@ -54,7 +65,7 @@ namespace BlogApp.BusinessLyaer.DependencyResolvers.Autofac
                 var config = context.Resolve<MapperConfiguration>();
                 return config.CreateMapper(context.Resolve);
             }).As<IMapper>().InstancePerLifetimeScope();
-
         }
     }
+
 }

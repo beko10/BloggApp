@@ -1,8 +1,8 @@
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using BlogApp.BusinessLyaer.DependencyResolvers.Autofac;
-using System.Reflection;
-using BlogApp.DataAccessLyaer.Concrete.EntityFramework;
+using BlogApp.BusinessLayer.Extensions;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +13,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddIdentityServices(builder.Configuration);
+
+
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(builder =>
 {
-
     builder.RegisterModule(new AutofacBusinessModule());
 });
 

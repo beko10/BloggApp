@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace BlogApp.BusinessLyaer.Abstract
 {
-    public interface IAppUserService
+    public interface ISessionManagementService
+
     {
         public Task<IdentityResult> RegisterUserAsync(RegisterDto registerDto);
-        public Task<SignInResult> LogInUserAsync(LoginDto loginDto);
+        public Task<IdentityResult> LogInUserAsync(LoginDto loginDto);
         public Task LogOutUserAsync();
     }
 }
