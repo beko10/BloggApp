@@ -43,6 +43,12 @@ namespace BlogApp.BusinessLyaer.Concrete
             return _tagDal.Get(x => x.TagId == id); 
         }
 
+        public TagResultDto GetByTagName(string tagTitle)
+        {
+            var result = _tagDal.Get(t => t.TagTitle == tagTitle);
+            return _mapper.Map<TagResultDto>(result);   
+        }
+
         public void Update(UpdateTagDto tag)
         {
             var updatedTag = _mapper.Map<Tag>(tag);

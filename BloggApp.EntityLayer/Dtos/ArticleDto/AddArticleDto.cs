@@ -1,4 +1,5 @@
 ﻿using BlogApp.EntityLayer.Dtos.TagDto;
+using BloggApp.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace BlogApp.EntityLayer.Dtos.ArticleDto
         public string ArticleTitle { get; set; }
         public string ArticleDescription { get; set; }
         public string UserId { get; set; }
-        public ICollection<TagResultDto> TagText { get; set; } 
+        public ICollection<TagResultDto> TagTitle { get; set; } 
     }
 }

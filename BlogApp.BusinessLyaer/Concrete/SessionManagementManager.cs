@@ -1,12 +1,9 @@
-﻿using BlogApp.BusinessLyaer.Abstract;
+﻿using BlogApp.BusinessLayer.Helpers;
+using BlogApp.BusinessLyaer.Abstract;
 using BlogApp.EntityLayer.Dtos;
 using BloggApp.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BlogApp.BusinessLyaer.Concrete
 {
@@ -30,30 +27,18 @@ namespace BlogApp.BusinessLyaer.Concrete
             var hasUser = await _userManager.FindByEmailAsync(loginDto.Email);
             if (hasUser == null)
             {
-                return IdentityResult.Failed(new IdentityError
-                {
-                    Code = "UserNotFound",
-                    Description = "Kullanıcı Bulunamadı "
-                });
+                return IdentityResult.Failed(IdentityErrorHelper.UserNotFound);
             }
             var logInresult = await _signInManager.PasswordSignInAsync(hasUser!, loginDto.Password, loginDto.RememberMe, true);
 
             if (!logInresult.Succeeded)
             {
-                return IdentityResult.Failed(new IdentityError
-                {
-                    Code = "UsernameOrPasswordIsIncorrect.",
-                    Description = "Kullanıcı Adı veya Şifre Hatalı"
-                });
+                return IdentityResult.Failed(IdentityErrorHelper.UsernameOrPasswordIsIncorrect);
             }
 
             if (logInresult.IsLockedOut)
             {
-                return IdentityResult.Failed(new IdentityError
-                {
-                    Code = "YourAccountIsLocked",
-                    Description = "3 Dakika Boyunca Giriş Yapamazsınız"
-                });
+                return IdentityResult.Failed(IdentityErrorHelper.YourAccountIsLocked);
             }
 
             return IdentityResult.Success;
@@ -70,6 +55,7 @@ namespace BlogApp.BusinessLyaer.Concrete
 
         public async Task<IdentityResult> RegisterUserAsync(RegisterDto registerDto)
         {
+
             var CreatedUser = new AppUser
             {
                 Email = registerDto.Email,
@@ -80,11 +66,7 @@ namespace BlogApp.BusinessLyaer.Concrete
             var registerResult =  await _userManager.CreateAsync(CreatedUser, registerDto.Password);
             if (!registerResult.Succeeded)
             {
-                return IdentityResult.Failed(new IdentityError
-                {
-                    Code= "UserRegistrationFailed",
-                    Description = "Kullanıcı Kayıt İşlemi Başarısız"
-                });
+                return IdentityResult.Failed(IdentityErrorHelper.UserRegistrationFailed);
             }
             return IdentityResult.Success;  
         }

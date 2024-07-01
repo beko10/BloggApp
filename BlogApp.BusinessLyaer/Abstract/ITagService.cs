@@ -12,6 +12,7 @@ namespace BlogApp.BusinessLyaer.Abstract
     {
         List<Tag> GetAll();
         Tag GetById(int id);
+        TagResultDto GetByTagName(string TagTitle);
         void Delete(Tag tag);
         void Add(AddTagDto tag);
         void Update(UpdateTagDto tag);

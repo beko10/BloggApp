@@ -15,7 +15,8 @@ namespace BlogApp.BusinessLyaer.Mapping.AutoMapper
         {
             CreateMap<Tag,TagResultDto>().ReverseMap();
             CreateMap<Tag,AddTagDto>().ReverseMap();    
-            CreateMap<Tag,UpdateTagDto>().ReverseMap(); 
+            CreateMap<Tag,UpdateTagDto>().ReverseMap();
+            CreateMap<TagResultDto, AddTagDto>().ReverseMap();
         }
     }
 }

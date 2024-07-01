@@ -41,7 +41,7 @@ namespace BlogApp.CoreLayer.DataAccessLayer.Concrete.EntityFramework
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            return (_context.Set<TEntity>().SingleOrDefault(filter))!;
+            return (_context.Set<TEntity>().FirstOrDefault(filter))!;
         }
 
         public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
