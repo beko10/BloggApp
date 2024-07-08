@@ -2,6 +2,8 @@
 using AutoMapper;
 using BlogApp.BusinessLyaer.Abstract;
 using BlogApp.BusinessLyaer.Concrete;
+using BlogApp.DataAccessLayer.Abstract;
+using BlogApp.DataAccessLayer.Concrete;
 using BlogApp.DataAccessLyaer.Abstract;
 using BlogApp.DataAccessLyaer.Concrete.EntityFramework;
 using BloggApp.EntityLayer.Concrete;
@@ -40,6 +42,9 @@ namespace BlogApp.BusinessLyaer.DependencyResolvers.Autofac
             // Tag
             builder.RegisterType<TagManager>().As<ITagService>().SingleInstance();
             builder.RegisterType<EfTagDal>().As<ITagDal>().SingleInstance();
+
+            //UoF
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().SingleInstance();  
 
             // Automapper
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())

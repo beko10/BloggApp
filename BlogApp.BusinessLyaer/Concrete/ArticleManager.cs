@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BlogApp.BusinessLyaer.Abstract;
+using BlogApp.DataAccessLayer.Abstract;
 using BlogApp.DataAccessLyaer.Abstract;
 using BlogApp.DataAccessLyaer.Concrete.EntityFramework;
 using BlogApp.EntityLayer.Dtos.ArticleDto;
@@ -18,40 +19,44 @@ namespace BlogApp.BusinessLyaer.Concrete
     public class ArticleManager : IArticleService
     {
         private readonly IArticleDal _articleDal;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ITagService _tagService;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public ArticleManager(IArticleDal articleDal, IMapper mapper, ITagService tagService, IHttpContextAccessor httpContextAccessor)
+        public ArticleManager(IArticleDal articleDal, IMapper mapper, ITagService tagService, IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork)
         {
             _articleDal = articleDal;
             _mapper = mapper;
             _tagService = tagService;
             _httpContextAccessor = httpContextAccessor;
+            _unitOfWork = unitOfWork;
         }
 
         public void Add(AddArticleDto article)
         {
             var addedArticle = _mapper.Map<Article>(article);
             addedArticle.UserId = "1";
-            AddArticleWithTag(article, addedArticle);   
-            _articleDal.Add(addedArticle);
+            AddArticleWithTag(article, addedArticle);
+            _unitOfWork.Articles.Add(addedArticle);
+            _unitOfWork.Commit();   
         }
 
         public void Delete(Article article)
         {
-            _articleDal.Delete(article);
+            _unitOfWork.Articles.Delete(article);   
+            _unitOfWork.Commit();
         }
 
         public List<ArticleResultDto> GetAll()
         {
-            var articles = _articleDal.GetAll();
+            var articles = _unitOfWork.Articles.GetAll();   
             return _mapper.Map<List<ArticleResultDto>>(articles);
 
         }
 
         public Article GetById(int id)
         {
-            return _articleDal.Get(x => x.ArticleId == id);
+            return _unitOfWork.Articles.Get(x => x.ArticleId == id);
         }
 
 
@@ -59,12 +64,13 @@ namespace BlogApp.BusinessLyaer.Concrete
         {
             var updetedArticle = _mapper.Map<Article>(article);
             updetedArticle.UserId = "1";
-            _articleDal.Update(updetedArticle);
+            _unitOfWork.Articles.Update(updetedArticle);
+            _unitOfWork.Commit();   
         }
 
         public ArticleDetailDto GetAllArticlesWithDetails(int articleId)
         {
-            var articleDetail = _mapper.Map<ArticleDetailDto>(_articleDal.GetAllArticlesWithDetails(articleId));
+            var articleDetail = _mapper.Map<ArticleDetailDto>(_unitOfWork.Articles);
             return articleDetail;
 
         }

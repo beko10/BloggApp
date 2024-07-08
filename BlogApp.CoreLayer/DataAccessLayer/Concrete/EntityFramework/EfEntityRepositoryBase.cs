@@ -24,19 +24,19 @@ namespace BlogApp.CoreLayer.DataAccessLayer.Concrete.EntityFramework
         public void Add(TEntity entity)
         {
             _context.Add(entity);
-            _context.SaveChanges();
+            
         }
 
         public void Delete(TEntity entity)
         {
             _context.Remove(entity);
-            _context.SaveChanges();
+         
         }
 
         public void Update(TEntity entity)
         {
             _context.Update(entity);
-            _context.SaveChanges();
+
         }
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
