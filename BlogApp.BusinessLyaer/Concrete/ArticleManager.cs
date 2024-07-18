@@ -35,7 +35,7 @@ namespace BlogApp.BusinessLyaer.Concrete
         public void Add(AddArticleDto article)
         {
             var addedArticle = _mapper.Map<Article>(article);
-            addedArticle.UserId = "1";
+            //addedArticle.UserId = GetCurrentUserId();
             AddArticleWithTag(article, addedArticle);
             _unitOfWork.Articles.Add(addedArticle);
             _unitOfWork.Commit();   
@@ -70,7 +70,7 @@ namespace BlogApp.BusinessLyaer.Concrete
 
         public ArticleDetailDto GetAllArticlesWithDetails(int articleId)
         {
-            var articleDetail = _mapper.Map<ArticleDetailDto>(_unitOfWork.Articles);
+            var articleDetail = _unitOfWork.Articles.GetAllArticlesWithDetails(articleId);
             return articleDetail;
 
         }
@@ -91,6 +91,10 @@ namespace BlogApp.BusinessLyaer.Concrete
                     article.Tags.Add(_mapper.Map<Tag>(tag));
                 }
             }
+        }
+        private string GetCurrentUserId()
+        {
+            return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
         }
     }
 }

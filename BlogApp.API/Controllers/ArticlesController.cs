@@ -1,7 +1,9 @@
 ﻿using BlogApp.BusinessLyaer.Abstract;
 using BlogApp.EntityLayer.Dtos.ArticleDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BlogApp.API.Controllers
 {
@@ -16,6 +18,8 @@ namespace BlogApp.API.Controllers
             _articleService = articleService;
         }
 
+
+        [Authorize]
         [HttpGet]
         public IActionResult GetArticleList()
         {

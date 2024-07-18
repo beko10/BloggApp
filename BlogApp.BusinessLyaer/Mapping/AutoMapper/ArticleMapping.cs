@@ -23,11 +23,11 @@ namespace BlogApp.BusinessLyaer.Mapping.AutoMapper
                  .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags))
                  .ReverseMap();    
 
-            CreateMap<Article, ArticleDetailDto>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
-                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags))
-                .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments))
-                .ReverseMap();
+            //CreateMap<Article, ArticleDetailDto>()
+            //    .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
+            //    .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags))
+            //    .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments))
+            //    .ReverseMap();
 
       
         }

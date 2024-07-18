@@ -4,6 +4,7 @@ using BlogApp.DataAccessLyaer.Abstract;
 using BlogApp.EntityLayer.Dtos.ArticleDto;
 using BlogApp.EntityLayer.Dtos.CommentDto;
 using BlogApp.EntityLayer.Dtos.TagDto;
+using BlogApp.EntityLayer.Dtos.UserDto;
 using BloggApp.EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,33 +26,34 @@ namespace BlogApp.DataAccessLyaer.Concrete.EntityFramework
         {
             using (var context = new BlogAppContext())
             {
-                var article = context.Articles
-                    .Include(a => a.User)
-                    .Include(a => a.Comments)
-                    .Include(a => a.Tags)
-                    .Where(a => a.ArticleId == articleId)
-                    .Select(a => new ArticleDetailDto
-                    {
-                        ArticleId = a.ArticleId,
-                        ArticleTitle = a.ArticleTitle,
-                        ArticleDescription = a.ArticleDescription,
-                        UserId = a.UserId,
-                        UserName = a.User.UserName!,
-                        Comments = a.Comments.Select(c => new CommentResultDto
-                        {
-                            CommentText = c.CommentText
-                        }).ToList(),
-                        Tags = a.Tags.Select(t => new TagResultDto
-                        {
-                            TagTitle = t.TagTitle
-                        }).ToList()
-                    })
-                    .SingleOrDefault();
+                var articleDetail = context.Articles
+                        .Include(a => a.Comments)
+                        .Include(a => a.Tags)
+                        .Include(a => a.User)
+                        .FirstOrDefault(x => x.ArticleId == articleId);
 
-                return article!;
+                return new ArticleDetailDto
+                {
+                    ArticleId = articleDetail.ArticleId,
+                    ArticleDescription = articleDetail.ArticleDescription,
+                    ArticleTitle = articleDetail.ArticleTitle,
+                    
+                    Comments = articleDetail.Comments.Select(c => new CommentResultDto
+                    {
+                        CommentText = c.CommentText,
+
+                    }).ToList(),
+                    
+                    Tags = articleDetail.Tags.Select(c => new TagResultDto
+                    {
+                        TagTitle = c.TagTitle,
+                    }).ToList(),
+                    UserName = articleDetail.User.UserName
+                };
+
             }
+
         }
 
     }
-
 }

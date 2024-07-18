@@ -12,5 +12,6 @@ namespace BlogApp.EntityLayer.Dtos.ArticleDto
     {
         public string ArticleTitle { get; set; }
         public string ArticleDescription { get; set; }
+
     }
 }
